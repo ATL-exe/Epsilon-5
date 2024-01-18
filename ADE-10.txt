@@ -1,0 +1,26 @@
+#include <Servo.h>
+
+// Define pins for LDR and servo
+const int ldrPin = A0;  // Pin connected to LDR
+const int servoPin = 9; // Pin connected to servo
+
+// Threshold value to determine sunlight
+const int sunlightThreshold = 500; // Adjust this value based on your LDR's readings
+
+Servo myservo;  // Create servo object
+
+void setup() {
+  myservo.attach(servoPin);  // Attach servo to pin 9
+}
+
+void loop() {
+  int ldrValue = analogRead(ldrPin);  // Read LDR value
+
+  if (ldrValue > sunlightThreshold) {  // If sunlight detected
+    myservo.write(180);  // Move servo to right (180 degrees)
+  } else {  // If no sunlight detected
+    myservo.write(0);  // Move servo to left (0 degrees)
+  }
+
+  delay(100);  // Wait for 100 milliseconds before next reading
+}
